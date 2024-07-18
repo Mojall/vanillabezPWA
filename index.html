@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(function(registration) {
+                    console.log('Service Worker registered with scope:', registration.scope);
+
+                    // Запрос разрешения на уведомления
+                    Notification.requestPermission()
+                        .then(function(permission) {
+                            if (permission === 'granted') {
+                                console.log('Notification permission granted.');
+
+                                const token = 'token-123456';
+                                const tokenDisplayElement = document.getElementById('fcm-token-display');
+                                tokenDisplayElement.textContent = token;
+                            } else {
+                                console.error('Unable to get permission to notify.');
+                            }
+                        })
+                        .catch(function(err) {
+                            console.error('Error during permission request.', err);
+                        });
+                })
+                .catch(function(err) {
+                    console.error('Service Worker registration failed:', err);
+                });
+        }
+
+        function sendNotification() {
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    const options = {
+                        body: 'This is a notification!',
+                        icon: 'icons/android-chrome-192x192.png',
+                        badge: 'icons/android-chrome-192x192.png'
+                    };
+                    registration.showNotification('Notification', options);
+                });
+            } else {
+                console.warn('Push messaging is not supported');
+            }
+        }
+    </script>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li class="button b1"><a href="#" onclick="showPage('home')">Home</a></li>
+            <li class="button b1"><a href="#" onclick="showPage('about')">About</a></li>
+            <li class="button b1"><a href="#" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div id="home" class="page">
+        <h1>Welcome to PWA</h1>
+        <p id="fcm-token-display"></p>
+        <button onclick="sendNotification()">Send Mock Notification</button>
+    </div>
+    <div id="about" class="page" style="display:none;">
+        <h1>About Us</h1>
+        <p>About page</p>
+    </div>
+    <div id="contact" class="page" style="display:none;">
+        <h1>Contact Us</h1>
+        <form id="contactForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+<footer>
+    <p>&copy; 2024 PWA</p>
+</footer>
+</body>
+<script src="scripts/navigation.js"></script>
+<script src="scripts/formHandler.js"></script>
+</html>

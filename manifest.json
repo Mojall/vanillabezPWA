@@ -1,0 +1,52 @@
+{
+  "name": "vanilapwa.ru",
+  "short_name": "vanilapwa",
+  "start_url": "/",
+  "display": "fullscreen",
+  "background_color": "#dc2f2f",
+  "theme_color": "#dc2f2f",
+  "orientation": "natural",
+  "scope": "/",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "36x36",
+      "type": "image/png",
+      "density": "0.75"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "density": "1.00"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "density": "1.50"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "density": "2.00"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "density": "3.00"
+    },
+    {
+      "src": "icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "density": "5.00"
+    }
+  ],
+  "id": "vanilapwa.ru",
+  "description": "vanilapwa"
+}
+
